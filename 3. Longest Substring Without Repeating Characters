@@ -1,0 +1,24 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if len(s) < 2:  ### len(s)
+            return len(s)
+        result = 0
+        dic = dict()
+        preIndex = -1
+
+        for i in range(len(s)):
+            if (not s[i] in dic) or (s[i] in dic and dic[s[i]] < preIndex):
+                dic[s[i]] = i
+                result = max(result, i - preIndex )
+            else:
+                index = dic[s[i]]
+                dic[s[i]] = i
+                preIndex = index 
+
+        return result
+# tips: 1. preIndex set to -1 so don't need to consider i - preIndex + 1 or +0
+#       2. if charactor in dic and preIndex > dic[chactor], doesn't matter !!!!!
